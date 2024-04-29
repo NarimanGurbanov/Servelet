@@ -12,7 +12,7 @@
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-<form class="container" action="index.jsp" method="POST">
+<form class="container" action="alma" method="POST">
     <div class="row">
         <div class="col-auto">
             <label for="name" class="form-label">name</label>

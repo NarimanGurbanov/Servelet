@@ -1,4 +1,4 @@
-package com.example.educationsystemwebabb;
+package org.example.servlet;
 
 public class Teacher  {
 
@@ -9,6 +9,7 @@ public class Teacher  {
     private String lastName;
     private Integer age;
     private Double salary;
+    private String password;
 
 
     public int getId() {
@@ -49,6 +50,14 @@ public class Teacher  {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

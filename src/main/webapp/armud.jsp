@@ -3,6 +3,7 @@
 <%@ page import="org.example.servlet.TeacherService" %>
 <%@ page import="org.example.servlet.Parametr" %>
 <%@ page import="org.example.servlet.Teacher" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,44 +15,10 @@
     <h1>Teachers </h1>
 
     <%
-        TeacherService teacherService = new TeacherService();
 
         final String name = Parametr.get(request.getParameter("name"));
         final String surname = Parametr.get(request.getParameter("surname"));
-        final Integer age = Parametr.parseInt(request.getParameter("age"));
-        final Double salary = Parametr.parseDouble(request.getParameter("salary"));
 
-        List<Teacher> teachers;
-        final String command = Parametr.get(request.getParameter("command"));
-
-        final Integer id = Parametr.parseInt(request.getParameter("id"));
-
-        if (command.equals("delete")) {
-            teacherService.deleteTeacher(id);
-            teachers = teacherService.printAll();
-        } else if (command.equals("insert")) {
-            Teacher teacher = new Teacher();
-            teacher.setFirstName(name);
-            teacher.setLastName(surname);
-            teacher.setAge(age);
-            teacher.setSalary(salary);
-            teacherService.insertTeacher(teacher);
-            teachers = teacherService.printAll();
-        }else if (command.equals("update")) {
-            Teacher teacher = new Teacher();
-            teacher.setFirstName(name);
-            teacher.setId(id);
-            teacher.setLastName(surname);
-            teacher.setAge(age);
-            teacher.setSalary(salary);
-            teacherService.updateTeacher(teacher);
-            teachers = teacherService.printAll();
-        }
-
-
-        else {
-             teachers = teacherService.findTeacher(name,surname);
-        }
 
     %>
 
@@ -115,6 +82,7 @@
         <tbody>
 
          <%
+             List<Teacher> teachers = (List<Teacher>) request.getAttribute("teacherList");
              for (int i=0;i<teachers.size();i++) {
                  Teacher teacher = teachers.get(i);
          %>

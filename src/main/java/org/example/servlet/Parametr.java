@@ -1,4 +1,4 @@
-package com.example.educationsystemwebabb;
+package org.example.servlet;
 
 public class Parametr {
 

@@ -1,9 +1,8 @@
-package com.example.educationsystemwebabb;
+package org.example.servlet;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class TeacherService {
     private static final String CONN_STRING = "jdbc:mysql://localhost:3306/education";
@@ -48,6 +47,7 @@ public class TeacherService {
                     teacher.setLastName(resultSet.getString("surname"));
                     teacher.setAge(resultSet.getInt("age"));
                     teacher.setSalary(resultSet.getDouble("salary"));
+                    teacher.setPassword(resultSet.getString("password"));
                 }
             }
         } catch (SQLException e) {
@@ -91,7 +91,7 @@ public class TeacherService {
         }
     }
 
-    public List<Teacher> findTeacher(String name, String surname) {
+    public List<Teacher> findTeacher(String name, String surname, String password) {
         List<Teacher> teachers = new ArrayList<>();
 
         String sql = "SELECT * FROM teacher WHERE name LIKE ?";
@@ -102,11 +102,17 @@ public class TeacherService {
             sql += " OR surname LIKE ?";
         }
 
+        if (password != null && !password.isEmpty()) {
+            sql += " OR password LIKE ?";
+        }
+
         try (Connection connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, "%" + name + "%");
             if (hasSurname) {
                 statement.setString(2, "%" + surname + "%");
+            } else if (password != null && !password.isEmpty()) {
+                statement.setString(2, "%" + password + "%");
             }
 
             try (ResultSet resultSet = statement.executeQuery()){
@@ -118,6 +124,7 @@ public class TeacherService {
                     teacher.setLastName(resultSet.getString("surname"));
                     teacher.setAge(resultSet.getInt("age"));
                     teacher.setSalary(resultSet.getDouble("salary"));
+                    teacher.setPassword(resultSet.getString("password"));
                     teachers.add(teacher);
 
                 }
@@ -146,6 +153,7 @@ public class TeacherService {
                 teacher.setLastName(resultSet.getString("surname"));
                 teacher.setAge(resultSet.getInt("age"));
                 teacher.setSalary(resultSet.getDouble("salary"));
+                teacher.setPassword(resultSet.getString("password"));
                 teachers.add(teacher);
 
             }

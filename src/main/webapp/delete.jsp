@@ -12,13 +12,13 @@
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-<form action="index.jsp">
+<form action="alma" method="POST">
     Silmeye eminsiniz ?
     <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/>
     <input type="hidden" name="command" value="delete"/>
 
     <button class="btn btn-primary" type="submit">YES</button>
-    <a href="index.jsp" class="btn btn-danger">NO</a>
+    <a href="armud.jsp" class="btn btn-danger">NO</a>
 
 </form>
 </body>

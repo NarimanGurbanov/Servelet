@@ -1,6 +1,7 @@
-<%@ page import="com.example.educationsystemwebabb.Parametr" %>
-<%@ page import="com.example.educationsystemwebabb.TeacherService" %>
-<%@ page import="com.example.educationsystemwebabb.Teacher" %><%--
+
+<%@ page import="org.example.servlet.Parametr" %>
+<%@ page import="org.example.servlet.TeacherService" %>
+<%@ page import="org.example.servlet.Teacher" %><%--
   Created by IntelliJ IDEA.
   User: n.gurbanov
   Date: 4/7/2024
@@ -19,7 +20,7 @@
     TeacherService teacherService = new TeacherService();
     Teacher foundTeacher = teacherService.findById(id);
 %>
-<form class="container" action="index.jsp" method="POST">
+<form class="container" action="alma" method="POST">
     <div class="row">
         <div class="col-auto">
             <label for="name" class="form-label">name</label>

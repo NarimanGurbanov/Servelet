@@ -1,7 +1,9 @@
 package org.example.servlet.servlet;
 
 import org.example.servlet.Teacher;
+import org.example.servlet.TeacherService;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,17 +13,34 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "loginServlet", value = "/login")
-public class HelloServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private final TeacherService teacherService = new TeacherService();
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+
+        request.getRequestDispatcher("login.jsp").forward(request,response);
+
+
+    }
+
+    @Override
+    public void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("name");
         String password = request.getParameter("password");
-        final List<Teacher> savedTeachers = (List<Teacher> ) request.getSession().getAttribute("savedTeachers");
-        PrintWriter out = response.getWriter();
-        out.println(savedTeachers);
+
+        List<Teacher> list = teacherService.findTeacher(username, null, password);
+        if (!list.isEmpty()) {
+            final Teacher teacher = list.get(0);
+            request.getSession().setAttribute("loggedInUser", teacher);
+        }
+
+        response.sendRedirect("alma");
+
 
     }
 
-    public void destroy() {
-    }
+
 }

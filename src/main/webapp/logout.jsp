@@ -8,25 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Logout</title>
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-<form class="container" action="login" method="POST">
-    <div class="row">
-        <div class="col-auto">
-            <label for="name" class="form-label">username</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="name" >
-        </div>
-        <div class="col-auto">
-            <label for="password" class="form-label">password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="password" >
-        </div>
-
-    </div>
+<form class="container" action="logout" method="POST">
+    Are sure to logout ?
     <div class="row">
         <div class="col-3">
-            <button type="submit" class="btn btn-primary mt-3" >LOGIN</button>
+            <button type="submit" class="btn btn-primary mt-3" >YES</button>
+            <a href="login" >NO</a>
         </div>
 
     </div>
